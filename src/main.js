@@ -36,14 +36,12 @@ app.innerHTML = `
   </div>
 `
 
-// Event listeners
 const generateBtn = document.getElementById('generate-btn')
 const output = document.getElementById('output')
 
 generateBtn.addEventListener('click', () => {
   const key = generateKey()
   
-  // Clear previous output and show new key
   output.innerHTML = `
     <div class="key-item">
       <div class="key-text">${key}</div>
@@ -54,18 +52,15 @@ generateBtn.addEventListener('click', () => {
     </div>
   `
   
-  // Add generation effect
   generateBtn.classList.add('generating')
   setTimeout(() => {
     generateBtn.classList.remove('generating')
   }, 300)
 })
 
-// Global functions
 window.copyToClipboard = async (text) => {
   try {
     await navigator.clipboard.writeText(text)
-    // Show feedback
     const btn = event.target
     const originalText = btn.textContent
     btn.textContent = 'COPIED'
@@ -76,7 +71,6 @@ window.copyToClipboard = async (text) => {
     }, 1500)
   } catch (err) {
     console.error('Failed to copy: ', err)
-    // Fallback for older browsers
     const textArea = document.createElement('textarea')
     textArea.value = text
     document.body.appendChild(textArea)
@@ -99,7 +93,6 @@ window.generateNew = () => {
   generateBtn.click()
 }
 
-// Auto-generate first key on load
 window.addEventListener('load', () => {
   setTimeout(() => {
     generateBtn.click()
